@@ -1,4 +1,5 @@
 import discord
+from discord.ext import commands
 import utils
 import constants
 
@@ -19,5 +20,8 @@ async def on_message(msg):
         botMsg = await ch.send(msg.content)
         await botMsg.delete()
         await utils.purgeChannel(ch)
+        voiceChannel = botClient.get_channel(264064057038864386)
+        voiceClient = await voiceChannel.connect()
+        voiceClient.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe",source=r"music/song_name.mp3"))
 
 botClient.run(constants.BOT_TOKEN)
