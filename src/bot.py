@@ -37,7 +37,7 @@ async def on_message(msg):
     else:
         await handleCommands(msg)
         # await botMsg.delete()
-        # await utils.purgeChannel(ch)
+        #await utils.purgeChannel(msg.channel)
         #voiceChannel = botClient.get_channel(constants.BOT_VOICE_CHANNEL_ID)
         # voiceClient = await voiceChannel.connect()
 
