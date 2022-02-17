@@ -1,9 +1,6 @@
-import os
 import discord
-from dotenv import load_dotenv
-
-load_dotenv()
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+import utils
+import constants
 
 botClient = discord.Client()
 
@@ -12,4 +9,15 @@ botClient = discord.Client()
 async def on_ready():
     print(f"{botClient.user} has connected!11")
 
-botClient.run(BOT_TOKEN)
+
+@botClient.event
+async def on_message(msg):
+    ch = msg.channel
+    if(ch.id != constants.BOT_TXT_CHANNEL_ID or msg.author == botClient.user):
+        return
+    else:
+        botMsg = await ch.send(msg.content)
+        await botMsg.delete()
+        await utils.purgeChannel(ch)
+
+botClient.run(constants.BOT_TOKEN)
