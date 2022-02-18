@@ -26,6 +26,8 @@ async def handleCommands(msg):
             await commands.printHelp(msg.channel)
         elif (cmd_name == constants.commands[4]):
             await commands.playSong(botClient.voice_clients[0], "song_name.format")
+        elif (cmd_name == constants.commands[5]):
+            await commands.purgeChannel(msg.channel)
         else:
             await commands.sayThereIsNoSuchCommand(msg.channel)
 
@@ -36,10 +38,5 @@ async def on_message(msg):
         return
     else:
         await handleCommands(msg)
-        # await botMsg.delete()
-        #await utils.purgeChannel(msg.channel)
-        #voiceChannel = botClient.get_channel(constants.BOT_VOICE_CHANNEL_ID)
-        # voiceClient = await voiceChannel.connect()
-
 
 botClient.run(constants.BOT_TOKEN)
