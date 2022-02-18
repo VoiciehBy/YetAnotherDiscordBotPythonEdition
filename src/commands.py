@@ -6,20 +6,26 @@ import discord
 async def sayHi(txtChannel):
     await txtChannel.send(constants.hiReply)
 
+
 async def disconnect(botClient):
     print(constants.byReply)
-    await botClient.voice_clients[0].disconnect()
+    if(botClient.voice_clients):
+        await botClient.voice_clients[0].disconnect()
+    await botClient.close()
+
 
 async def joinVoiceChannel(botClient, channel):
     voiceChannel = botClient.get_channel(channel.id)
     if(not(voiceChannel)):
         return
-    else:
+    elif(not(botClient.voice_clients)):
         voiceClient = await voiceChannel.connect()
 
+
 async def playSong(voiceClient, song_name_with_ext):
-    voiceClient.play(discord.FFmpegPCMAudio(
-        executable="ffmpeg.exe", source=constants.cwd[:len(constants.cwd)-3] + r"music/"+song_name_with_ext))
+    if(voiceClient):
+        voiceClient.play(discord.FFmpegPCMAudio(
+            executable="ffmpeg.exe", source=constants.cwd[:len(constants.cwd)-3] + r"music/"+song_name_with_ext))
 
 
 async def printHelp(txtChannel):
