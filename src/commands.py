@@ -16,6 +16,7 @@ async def disconnect(botClient):
 
 async def joinVoiceChannel(botClient, channel):
     voiceChannel = botClient.get_channel(channel.id)
+    print(constants.hiReply)
     if(not(voiceChannel)):
         return
     elif(not(botClient.voice_clients)):
