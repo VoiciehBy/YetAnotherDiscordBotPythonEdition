@@ -11,10 +11,18 @@ def isCommmand(msg):
 
 
 def getCommandName(msg):
-    if (len(msg.content) > 1):
-        return msg.content.strip()[(len(constants.PREFIX)):]
+    if (msg.content.find(' ') != -1):
+        return msg.content[(len(constants.PREFIX)):msg.content.find(' ')]
+    elif(len(msg.content) > 1):
+        return msg.content[(len(constants.PREFIX)):]
     else:
         return constants.PREFIX
+
+def getCommandArguments(msg):
+    if (len(msg.content) > 1):
+        return msg.content.strip()[msg.content.find(' ')+1:]
+    else:
+        return " "
 
 
 def commandsHelp():

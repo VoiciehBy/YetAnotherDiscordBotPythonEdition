@@ -15,6 +15,7 @@ async def on_ready():
 async def handleCommands(msg):
     if (utils.isCommmand(msg)):
         cmd_name = utils.getCommandName(msg)
+        cmd_arg = utils.getCommandArguments(msg)
         if (cmd_name == constants.commands[0]):
             await commands.sayHi(msg.channel)
         elif (cmd_name == constants.commands[1]):
@@ -25,7 +26,7 @@ async def handleCommands(msg):
         elif (cmd_name == constants.commands[3]):
             await commands.printHelp(msg.channel)
         elif (cmd_name == constants.commands[4]):
-            await commands.playSong(botClient.voice_clients[0], "song_name.format")
+            await commands.playSong(botClient.voice_clients[0], cmd_arg)
         elif (cmd_name == constants.commands[5]):
             await commands.purgeChannel(msg.channel)
         else:
