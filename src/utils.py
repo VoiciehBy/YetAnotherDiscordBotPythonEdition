@@ -1,5 +1,11 @@
 import constants
 import discord
+import youtube_dl
+
+def download_music(url):
+    ytdl_opts = {"format":"bestaudio"}
+    with youtube_dl.YoutubeDL(ytdl_opts) as ytdl:
+        ytdl.download([url])
 
 
 def ifMsgComesFromBot(msg):

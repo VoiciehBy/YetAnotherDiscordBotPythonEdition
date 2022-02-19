@@ -19,16 +19,18 @@ async def handleCommands(msg):
         if (cmd_name == constants.commands[0]):
             await commands.sayHi(msg.channel)
         elif (cmd_name == constants.commands[1]):
-            await commands.disconnect(botClient)
-        elif (cmd_name == constants.commands[2]):
             voiceChannel = utils.getVoiceChannel(botClient)
             await commands.joinVoiceChannel(botClient, voiceChannel)
+        elif (cmd_name == constants.commands[2]):
+            await commands.disconnect(botClient)
         elif (cmd_name == constants.commands[3]):
-            await commands.printHelp(msg.channel)
-        elif (cmd_name == constants.commands[4]):
             await commands.playSong(botClient.voice_clients[0], cmd_arg)
+        elif (cmd_name == constants.commands[4]):
+            await commands.stopSong(botClient.voice_clients[0])
         elif (cmd_name == constants.commands[5]):
             await commands.purgeChannel(msg.channel)
+        elif (cmd_name == constants.commands[6]):
+            await commands.printHelp(msg.channel)
         else:
             await commands.sayThereIsNoSuchCommand(msg.channel)
 
