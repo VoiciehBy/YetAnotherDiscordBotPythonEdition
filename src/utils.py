@@ -8,13 +8,19 @@ def music_url(song_name):
     url = str(constants.ytUrl+dict.get("url_suffix"))
     return url
 
+def song_title(url):
+    dict = YoutubeSearch(url,max_results=1).to_dict()[0]
+    title = str(dict.get("title"))
+    return title
+
 def download_music(url):
-    ytdl_opts = {"format":"bestaudio",
+    ytdl_opts = {"format":"bestaudio[ext=m4a]",
     "embeded-thumbnail": True,
     "add-metadata": True,
     "outtmpl":constants.musicDirPath + f"%(title)s" + ".%(ext)s"}
     with youtube_dl.YoutubeDL(ytdl_opts) as ytdl:
         ytdl.download([url])
+    return constants.musicDirPath+song_title(url)+".m4a"
 
 
 def ifMsgComesFromBot(msg):
