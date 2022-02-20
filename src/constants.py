@@ -7,6 +7,7 @@ BOT_TXT_CHANNEL_ID = int(os.getenv("BOT_TXT_CHANNEL_ID"))
 BOT_VOICE_CHANNEL_ID = int(os.getenv("BOT_VOICE_CHANNEL_ID"))
 cwd = os.getcwd()
 musicDirPath = cwd[:len(cwd)-3] + r"music/"
+ytUrl = "https://www.youtube.com/"
 
 PREFIX = '!'
 hiReply = "Hehe,hihiho!!1"

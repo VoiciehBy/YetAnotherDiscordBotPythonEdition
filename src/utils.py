@@ -1,9 +1,18 @@
 import constants
 import discord
 import youtube_dl
+from youtube_search import YoutubeSearch
+
+def music_url(song_name):
+    dict = YoutubeSearch(song_name,max_results=1).to_dict()[0]
+    url = str(constants.ytUrl+dict.get("url_suffix"))
+    return url
 
 def download_music(url):
-    ytdl_opts = {"format":"bestaudio"}
+    ytdl_opts = {"format":"bestaudio",
+    "embeded-thumbnail": True,
+    "add-metadata": True,
+    "outtmpl":constants.musicDirPath + f"%(title)s" + ".%(ext)s"}
     with youtube_dl.YoutubeDL(ytdl_opts) as ytdl:
         ytdl.download([url])
 
