@@ -39,9 +39,9 @@ async def printHelp(txtChannel):
     await txtChannel.send(utils.commandsHelp())
 
 
-async def sayThereIsNoSuchCommand(txtChannel):
-    await txtChannel.send(constants.defaultReply)
-
-
 async def purgeChannel(ch):
     await ch.purge()
+
+
+async def sayThereIsNoSuchCommand(txtChannel):
+    await txtChannel.send(constants.defaultReply)
