@@ -9,6 +9,7 @@ cwd = os.getcwd()
 musicDirPath = cwd[:len(cwd)-3] + r"music" + "\\"
 ytUrl = "https://www.youtube.com/"
 default_music_download_extension = "m4a"
+autojoin = True
 
 PREFIX = '!'
 hiReply = "Hehe,hihiho!!1"

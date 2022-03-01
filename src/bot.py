@@ -9,6 +9,9 @@ botClient = discord.Client()
 @botClient.event
 async def on_ready():
     print(f"{botClient.user} has connected!11")
+    if(constants.autojoin):
+        voiceChannel = utils.getVoiceChannel(botClient)
+        await commands.joinVoiceChannel(botClient, voiceChannel)
 
 
 @botClient.event
