@@ -23,15 +23,14 @@ async def disconnect(botClient):
     await botClient.close()
 
 
-async def playSong(voiceClient, song_name_with_ext):
-    song_path = utils.download_music(utils.music_url(song_name_with_ext))
+async def playSong(voiceClient, song_name):
+    song_path = utils.download_music(utils.music_url(song_name))
+
     if(voiceClient):
-        if(not(voiceClient.is_playing())):
+        if(not(voiceClient.is_playing()) and (voiceClient)):
             voiceClient.play(discord.FFmpegPCMAudio(source=song_path))
-            
-    start = song_path.find("\music") + 7
-    end = song_path.find("." + constants.default_music_download_extension)
-    constants.current_song_name = song_path[start:end]
+        else:
+            print(constants.playa_busy_txt)
 
 
 async def stopSong(voiceClient):

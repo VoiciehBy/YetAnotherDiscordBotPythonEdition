@@ -21,4 +21,5 @@ commands_desc = ["wyświetla " + "'" + hiReply + "'", "podłącza bota do serwer
                  "odtwarza pewną pieśń", "zatrzymuje muzykę", "czyści kanał tekstowy bota", "wyświetla pomoc"]
 
 now_txt = "Teraz: "
-current_song_name = "None" #pseudo-constant
+next_txt = "Za chwilę: "
+playa_busy_txt = "The playa busy..."
