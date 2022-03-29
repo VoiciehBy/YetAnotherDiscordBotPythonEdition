@@ -29,8 +29,10 @@ async def playSong(voiceClient, song_name):
     if(voiceClient):
         if(not(voiceClient.is_playing()) and (voiceClient)):
             voiceClient.play(discord.FFmpegPCMAudio(source=song_path))
+            return 1
         else:
             print(constants.playa_busy_txt)
+            return -1
 
 
 async def stopSong(voiceClient):
