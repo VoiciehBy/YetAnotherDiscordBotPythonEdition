@@ -28,6 +28,7 @@ async def handleCommands(msg):
             await commands.disconnect(botClient)
         elif (cmd_name == constants.commands[3]):
             await commands.playSong(botClient.voice_clients[0], cmd_arg)
+            await msg.channel.send(constants.now_txt + constants.current_song_name)
         elif (cmd_name == constants.commands[4]):
             await commands.stopSong(botClient.voice_clients[0])
         elif (cmd_name == constants.commands[5]):

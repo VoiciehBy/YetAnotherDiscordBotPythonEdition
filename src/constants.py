@@ -19,3 +19,6 @@ defaultReply = "Nie ma takiej komendy,XDddd."
 commands = ["siema", "połącz", "won", "graj", "stop", "czyść",  "pomoc"]
 commands_desc = ["wyświetla " + "'" + hiReply + "'", "podłącza bota do serwera głosowego", "rozłącza bota",
                  "odtwarza pewną pieśń", "zatrzymuje muzykę", "czyści kanał tekstowy bota", "wyświetla pomoc"]
+
+now_txt = "Teraz: "
+current_song_name = "None" #pseudo-constant
