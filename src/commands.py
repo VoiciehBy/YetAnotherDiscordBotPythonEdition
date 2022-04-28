@@ -24,7 +24,7 @@ async def disconnect(botClient):
 
 
 async def playSong(voiceClient, song_name):
-    song_path = utils.download_music(utils.music_url(song_name))
+    song_path = utils.download_music(utils.music_url(song_name)).replace('|', '_')#fix
 
     if(voiceClient):
         if(not(voiceClient.is_playing()) and (voiceClient)):
