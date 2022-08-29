@@ -5,15 +5,21 @@ from youtube_search import YoutubeSearch
 
 
 def music_url(song_name):
-    dict = YoutubeSearch(song_name, max_results=1).to_dict()[0]
-    url = str(constants.ytUrl+dict.get("url_suffix"))
-    return url
+    if(YoutubeSearch(song_name, max_results=1).to_dict()):
+        dict = YoutubeSearch(song_name, max_results=1).to_dict()[0]
+        url = str(constants.ytUrl+dict.get("url_suffix"))
+        return url
+    else:
+        return "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
 
 def song_title(url):
-    dict = YoutubeSearch(url, max_results=1).to_dict()[0]
-    title = str(dict.get("title"))
-    return title
+    if(YoutubeSearch(url, max_results=1).to_dict()):
+        dict = YoutubeSearch(url, max_results=1).to_dict()[0]
+        title = str(dict.get("title"))
+        return title
+    else:
+        return "None"
 
 
 def download_music(url):
