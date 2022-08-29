@@ -1,36 +1,38 @@
 import discord
 import commands
-import utils
+import utils as u
 import constants
 
-botClient = discord.Client()
+intents = discord.Intents.default()
+intents.message_content = True
+botClient = discord.Client(intents=intents)
 
 
 @botClient.event
 async def on_ready():
     print(f"{botClient.user} has connected!11")
     if(constants.autojoin):
-        voiceChannel = utils.getVoiceChannel(botClient)
+        voiceChannel = u.getVoiceChannel(botClient)
         await commands.joinVoiceChannel(botClient, voiceChannel)
 
 
 @botClient.event
 async def handleCommands(msg):
-    if (utils.isCommmand(msg)):
-        cmd_name = utils.getCommandName(msg)
-        cmd_arg = utils.getCommandArguments(msg)
+    if (u.isCommmand(msg)):
+        cmd_name = u.getCommandName(msg)
+        cmd_arg = u.getCommandArguments(msg)
         if (cmd_name == constants.commands[0]):
             await commands.sayHi(msg.channel)
         elif (cmd_name == constants.commands[1]):
-            voiceChannel = utils.getVoiceChannel(botClient)
+            voiceChannel = u.getVoiceChannel(botClient)
             await commands.joinVoiceChannel(botClient, voiceChannel)
         elif (cmd_name == constants.commands[2]):
             await msg.channel.send(constants.byReply)
             await commands.disconnect(botClient)
         elif (cmd_name == constants.commands[3]):
-            await msg.channel.send(constants.next_txt + utils.song_title(utils.music_url(cmd_arg)))
+            await msg.channel.send(constants.next_txt + u.song_title(u.music_url(cmd_arg)))
             if(await commands.playSong(botClient.voice_clients[0], cmd_arg) == 1):
-                await msg.channel.send(constants.now_txt + utils.song_title(utils.music_url(cmd_arg)))
+                await msg.channel.send(constants.now_txt + u.song_title(u.music_url(cmd_arg)))
             elif(await commands.playSong(botClient.voice_clients[0], cmd_arg) == -1):
                 await msg.channel.send(constants.playa_busy_txt)
         elif (cmd_name == constants.commands[4]):
@@ -45,7 +47,7 @@ async def handleCommands(msg):
 
 @botClient.event
 async def on_message(msg):
-    if(not(utils.ifMsgOnTheChannel(msg, constants.BOT_TXT_CHANNEL_ID)) or utils.ifMsgComesFromBot(msg)):
+    if(not(u.ifMsgOnTheChannel(msg, constants.BOT_TXT_CHANNEL_ID)) or u.ifMsgComesFromBot(msg)):
         return
     else:
         await handleCommands(msg)
