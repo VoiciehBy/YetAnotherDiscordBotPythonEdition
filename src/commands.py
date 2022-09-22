@@ -17,7 +17,7 @@ class botClient(d.Client):
             voiceClient = await voiceChannel.connect()
 
     async def on_ready(self):
-        print(f"{botClient.user} has connected!11")
+        print(f"{self.user} has connected!11")
         if (c.autojoin):
             voiceChannel = u.getVoiceChannel(self)
             await self.joinVoiceChannel(voiceChannel)
