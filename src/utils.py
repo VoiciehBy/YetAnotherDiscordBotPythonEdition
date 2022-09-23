@@ -4,23 +4,30 @@ import youtube_dl
 from youtube_search import YoutubeSearch
 
 
+def getSongs(searchTerm):
+    return YoutubeSearch(searchTerm, max_results=1).to_dict()
+
 def music_url(song_name):
-    if(YoutubeSearch(song_name, max_results=1).to_dict()):
-        dict = YoutubeSearch(song_name, max_results=1).to_dict()[0]
-        url = str(constants.ytUrl+dict.get("url_suffix"))
+    songs = getSongs(song_name)
+    
+    if(songs):
+        ytUrl = "https://www.youtube.com/"
+        song = songs[0]
+        url = str(ytUrl+song.get("url_suffix"))
         return url
     else:
         return "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
 
 def song_title(url):
-    if(YoutubeSearch(url, max_results=1).to_dict()):
-        dict = YoutubeSearch(url, max_results=1).to_dict()[0]
-        title = str(dict.get("title"))
+    songs = getSongs(url)
+
+    if(songs):
+        song = songs[0]
+        title = str(song.get("title"))
         return title
     else:
         return "None"
-
 
 def download_music(url):
     d_m_d_e = constants.default_music_download_extension
