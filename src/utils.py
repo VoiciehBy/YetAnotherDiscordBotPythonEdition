@@ -1,20 +1,26 @@
-import constants
-import discord
-import youtube_dl
 from youtube_search import YoutubeSearch
+import song as s
+import gc
+import constants
+import youtube_dl
+import discord
 
 
 def getSongs(searchTerm):
-    return YoutubeSearch(searchTerm, max_results=1).to_dict()
+    dict = YoutubeSearch(searchTerm, max_results=2).to_dict()
+    songs = list()
+    for i in dict:
+        songs.append(s.song(i.get("title"), i.get("url_suffix")))
+    del dict
+    gc.collect()
+    return songs
+
 
 def music_url(song_name):
     songs = getSongs(song_name)
-    
-    if(songs):
-        ytUrl = "https://www.youtube.com/"
-        song = songs[0]
-        url = str(ytUrl+song.get("url_suffix"))
-        return url
+    for song in songs:
+        if(song.title.lower().__contains__(song_name.lower())):
+            return song.url
     else:
         return "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 
@@ -22,12 +28,12 @@ def music_url(song_name):
 def song_title(url):
     songs = getSongs(url)
 
-    if(songs):
-        song = songs[0]
-        title = str(song.get("title"))
-        return title
+    for song in songs:
+        if (song.url == url):
+            return song.title
     else:
         return "None"
+
 
 def download_music(url):
     d_m_d_e = constants.default_music_download_extension
@@ -51,7 +57,7 @@ def isCommmand(msg):
 def getCommandName(msg):
     if (msg.content.find(' ') != -1):
         return msg.content[(len(constants.PREFIX)):msg.content.find(' ')]
-    elif(len(msg.content) > 1):
+    elif (len(msg.content) > 1):
         return msg.content[(len(constants.PREFIX)):]
     else:
         return constants.PREFIX
